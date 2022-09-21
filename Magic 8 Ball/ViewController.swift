@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     let ballImages = ["ball1", "ball2", "ball3", "ball4", "ball5"]
     let askMeLabel = makeBoldLabel(withText: "Ask Me Anything..." )
     
+    
     let contentView: UIView = {
         let view = UIView()
         
@@ -29,11 +30,20 @@ class ViewController: UIViewController {
         return ballImage
     }()
     
+    let askMeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
     override func viewDidLoad() {
             super.viewDidLoad()
             // Do any additional setup after loading the view.
         view.backgroundColor = .cyan
+        ballImageView.image = UIImage(named: ballImages[Int.random(in: 0...4)])
         
+        setUpAskMeButton()
         setupViews()
        
         }
@@ -43,9 +53,10 @@ class ViewController: UIViewController {
         
         view.addSubview(askMeLabel)
         view.addSubview(ballImageView)
+        view.addSubview(askMeButton)
         
-        ballImageView.image = UIImage(named: ballImages[4])
-        
+    
+    
         NSLayoutConstraint.activate([
             askMeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             askMeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
@@ -57,7 +68,15 @@ class ViewController: UIViewController {
             ballImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
             ballImageView.topAnchor.constraint(equalTo: askMeLabel.bottomAnchor, constant: 50),
             ballImageView.bottomAnchor.constraint(equalTo: askMeLabel.bottomAnchor, constant: 300)
-            
+
+        ])
+        
+        NSLayoutConstraint.activate([
+            askMeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            askMeButton.topAnchor.constraint(equalTo: ballImageView.bottomAnchor, constant: 80),
+            askMeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
+            askMeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+            askMeButton.bottomAnchor.constraint(equalTo: ballImageView.bottomAnchor, constant: 130)
         ])
         
     
